@@ -1,0 +1,92 @@
+
+<!--
+    +------------------------------------------+
+    ¦              FADILXCODER                 ¦
+    ¦------------------------------------------¦
+    ¦        facebook.com/fadil.xcoder         ¦
+    +------------------------------------------+
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>JQuery Mobile - RSS</title>
+        <meta name="author" content="fadilxcoder" />
+        <meta name="copyright" content="fadilxcoder" />
+    	<meta charset="utf-8">
+		<meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+    	<link rel="stylesheet" href="./assets/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet" href="./assets/jquery.mobile-style.css">
+    	<script src="./assets/jquery.mobile-1.12.4-jquery.min.js"></script>
+    	<script src="./assets/jquery.mobile-1.4.5.min.js"></script>
+    </head>
+    <body>
+        <div data-role="page" id="home-page" data-theme="a">
+            <header data-role="header" role="banner">
+                <picture>
+                    <img src="./assets/images/jquery-logo.png" alt="Logo JQM" />
+                </picture>
+                <h1>RSS FEED</h1>
+                <picture>
+                    <img src="./assets/images/image.gif" alt="Banner Image" />
+                </picture>
+            </header>
+            <div data-role="content">
+                <ul data-role="listview" data-inset="true" id="ListContainer"></ul>
+            </div>
+            <footer data-role="footer" data-position="fixed">
+        		<div data-role="navbar">
+        			<ul>
+        				<li><a href="#" data-icon="ui-btn ui-icon-home"></a></li>
+        				<li><a href="#" data-icon="ui-btn ui-icon-calendar"></a></li>
+        				<li><a href="#" data-icon="ui-btn ui-icon-camera"></a></li>
+                        <li><a href="#" data-icon="ui-btn ui-icon-heart"></a></li>
+        				<li><a href="#" data-icon="ui-btn ui-icon-comment"></a></li>
+        			</ul>
+        		</div>
+	        </footer>
+        </div>
+        
+        <div data-role="page" id="popup">
+        	<div data-role="header" data-theme="a">
+        		<h1></h1>
+        	</div>
+        	<div role="main" class="ui-content">
+        		<h2></h2>
+        		<p></p>
+        	</div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function(){ 
+                $.ajax({
+                    dataType : 'json',
+                    url      : 'http://iox.000webhostapp.com/rss.php',
+                    type     : 'GET',
+                    success  : function (data){
+						var table = '';
+						$.each(data.items, function (idx, obj) 
+						{                                   
+							table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="pop" data-description-text="'+ obj.description_text+'" data-title="'+ obj.title+'" >' + obj.title + '</a></li>');
+						});
+                        $("#ListContainer").append(table);
+                        $("#ListContainer li").addClass('ui-first-child ui-last-child')
+                        $("#ListContainer li a").addClass('ui-btn ui-btn-icon-right ui-icon-carat-r')
+                    },
+                    error   : function(e){
+                        console.log(e.statusText);
+            		},
+                    fail    : function (){ 
+                    	console.log("Request Fail");
+                    }
+                });
+                $(document).on('click', 'li.click-to-pop-up', function(){   
+                    var title = $(this).children('a').attr('data-title');
+                    var description = $(this).children('a').attr('data-description-text').replace('To read this article in full, please click here', '');
+                    $('#popup div.ui-content h2').text(title);
+                    $('#popup div.ui-content p').text(description);
+                }); 
+            });
+        </script>
+    </body>
+</html>
