@@ -7,13 +7,18 @@
     <author email="fadil@xcoder.developer" href="https://www.facebook.com/fadil.xcoder">
         fadilxcoder
     </author>
+	
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
-	<preference name="permissions" value="none" />
+	<plugin name="cordova-plugin-splashscreen" source="npm" />
+	
     <preference name="orientation" value="portrait" />
-    <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="true" />
 	<preference name="AutoHideSplashScreen" value="true" />
 	<preference name="SplashScreenDelay" value="10000" />
+	<preference name="KeepRunning" value="false"/>
+	<preference name="SplashScreen" value="screen"/>
+	<preference name="android-build-tool" value="gradle" /> 
+	
 	<icon src="icon.png" />
     <splash src="splash.png" />
     <content src="index.html" />
