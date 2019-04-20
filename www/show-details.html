@@ -63,19 +63,14 @@
                 $.ajax({
                     dataType : 'json',
                     url      : 'https://iox.000webhostapp.com/db.php',
-                    //url      : 'http://localhost/rss-feed-xml-json-jqm-app/db.php',
                     cache    : true,
                     type     : 'GET',
                     success  : function (data){
 						var table = '';
-                        //console.log(data[12]);
-                        //var information = JSON.parse(data[i]); 
                         delete data['log'];
                         delete data['msg'];
 						$.each(data, function (idx, obj )
-						{    
-                            //console.log(data[i]);
-                            //console.log(data[idx]._id);                              
+						{                              
                             console.log(idx);
 							table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-_id="'+ data[idx]._id+'" data-_name="'+ data[idx]._name+'" data-_subject="'+ data[idx]._subject+'" data-_message="'+ data[idx]._message+'" data-_email="'+ data[idx]._email+'" >' + data[idx]._name + '</a></li>');
 						});
