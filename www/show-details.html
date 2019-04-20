@@ -28,6 +28,7 @@
                     <img src="./assets/images/jquery-logo.png" alt="Logo JQM" />
                 </picture>
                 <h1>RSS FEED</h1>
+                <h6>DETAILS</h6>
                 <picture>
                     <img src="./assets/images/image.gif" alt="Banner Image" />
                 </picture>
@@ -41,33 +42,42 @@
                         <li><a href="#" data-rel="back" data-icon="ui-btn ui-icon-back"></a></li>
                         <li><a href="index.html" data-transition="flow" data-icon="ui-btn ui-icon-home"></a></li>
                         <li><a href="show-details.html" data-transition="flip" data-icon="ui-btn ui-icon-bullets"></a></li>
-                        <li><a href="contact-us.html" data-transition="slideup" data-icon="ui-btn ui-icon-comment"></a></li>
+        				<li><a href="contact-us.html" data-transition="slideup" data-icon="ui-btn ui-icon-comment"></a></li>
         			</ul>
         		</div>
 	        </footer>
         </div>
-        
         <div data-role="page" id="popup">
-        	<div data-role="header" data-theme="a">
-        		<h1></h1>
-        	</div>
-        	<div role="main" class="ui-content">
-        		<h2></h2>
-        		<p></p>
-        	</div>
+            <div data-role="header" class="ui-top-title" data-theme="a">
+                <h1></h1>
+            </div>
+            <div role="main" class="ui-content">
+                <h2></h2>
+                <h3></h3>
+                <h4></h4>
+                <p></p>
+            </div>
         </div>
         <script type="text/javascript">
             $(document).ready(function(){ 
                 $.ajax({
                     dataType : 'json',
-                    url      : 'http://iox.000webhostapp.com/rss.php',
+                    url      : 'https://iox.000webhostapp.com/db.php',
+                    //url      : 'http://localhost/rss-feed-xml-json-jqm-app/db.php',
                     cache    : true,
                     type     : 'GET',
                     success  : function (data){
 						var table = '';
-						$.each(data.items, function (idx, obj) 
-						{                                   
-							table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-description-text="'+ obj.description_text+'" data-title="'+ obj.title+'" >' + obj.title + '</a></li>');
+                        //console.log(data[12]);
+                        //var information = JSON.parse(data[i]); 
+                        delete data['log'];
+                        delete data['msg'];
+						$.each(data, function (idx, obj )
+						{    
+                            //console.log(data[i]);
+                            //console.log(data[idx]._id);                              
+                            console.log(idx);
+							table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-_id="'+ data[idx]._id+'" data-_name="'+ data[idx]._name+'" data-_subject="'+ data[idx]._subject+'" data-_message="'+ data[idx]._message+'" data-_email="'+ data[idx]._email+'" >' + data[idx]._name + '</a></li>');
 						});
                         $("#ListContainer").append(table);
                         $("#ListContainer li").addClass('ui-first-child ui-last-child');
@@ -81,10 +91,16 @@
                     }
                 });
                 $(document).on('click', 'li.click-to-pop-up', function(){   
-                    var title = $(this).children('a').attr('data-title');
-                    var description = $(this).children('a').attr('data-description-text').replace('To read this article in full, please click here', '');
-                    $('#popup div.ui-content h2').text(title);
-                    $('#popup div.ui-content p').text(description);
+                    var _id         = $(this).children('a').attr('data-_id');
+                    var _name       = $(this).children('a').attr('data-_name');
+                    var _subject    = $(this).children('a').attr('data-_subject');
+                    var _message    = $(this).children('a').attr('data-_message');
+                    var _email      = $(this).children('a').attr('data-_email');
+                    $('#popup div.ui-top-title h1').text('# '+_id);
+                    $('#popup div.ui-content h2').text(_subject);
+                    $('#popup div.ui-content h3').text(_name);
+                    $('#popup div.ui-content h4').text(_email);
+                    $('#popup div.ui-content p').text(_message);
                 }); 
             });
         </script>

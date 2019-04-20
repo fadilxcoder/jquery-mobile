@@ -19,7 +19,7 @@
     	<link rel="stylesheet" href="./assets/jquery.mobile-1.4.5.min.css">
         <link rel="stylesheet" href="./assets/jquery.mobile-style.css">
     	<script src="./assets/jquery.mobile-1.12.4-jquery.min.js"></script>
-    	<script src="./assets/jquery.mobile-1.4.5.min.js"></script>
+        <script src="./assets/jquery.mobile-1.4.5.min.js"></script>
     </head>
     <body>
         <div data-role="page" id="home-page" data-theme="a">
@@ -38,11 +38,10 @@
             <footer data-role="footer" data-position="fixed">
         		<div data-role="navbar">
         			<ul>
-        				<li><a href="#" data-icon="ui-btn ui-icon-home"></a></li>
-        				<li><a href="#" data-icon="ui-btn ui-icon-calendar"></a></li>
-        				<li><a href="#" data-icon="ui-btn ui-icon-camera"></a></li>
-                        <li><a href="#" data-icon="ui-btn ui-icon-heart"></a></li>
-        				<li><a href="#" data-icon="ui-btn ui-icon-comment"></a></li>
+                        <li><a href="#" data-rel="back" data-icon="ui-btn ui-icon-back"></a></li>
+                        <li><a href="index.html" data-transition="flow" data-icon="ui-btn ui-icon-home"></a></li>
+                        <li><a href="show-details.html" data-transition="flip" data-icon="ui-btn ui-icon-bullets"></a></li>
+                        <li><a href="contact-us.html" data-transition="slideup" data-icon="ui-btn ui-icon-comment"></a></li>
         			</ul>
         		</div>
 	        </footer>
@@ -62,16 +61,17 @@
                 $.ajax({
                     dataType : 'json',
                     url      : 'http://iox.000webhostapp.com/rss.php',
+                    cache    : true,
                     type     : 'GET',
                     success  : function (data){
 						var table = '';
 						$.each(data.items, function (idx, obj) 
 						{                                   
-							table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="pop" data-description-text="'+ obj.description_text+'" data-title="'+ obj.title+'" >' + obj.title + '</a></li>');
+							table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-description-text="'+ obj.description_text+'" data-title="'+ obj.title+'" >' + obj.title + '</a></li>');
 						});
                         $("#ListContainer").append(table);
-                        $("#ListContainer li").addClass('ui-first-child ui-last-child')
-                        $("#ListContainer li a").addClass('ui-btn ui-btn-icon-right ui-icon-carat-r')
+                        $("#ListContainer li").addClass('ui-first-child ui-last-child');
+                        $("#ListContainer li a").addClass('ui-btn ui-btn-icon-right ui-icon-carat-r');
                     },
                     error   : function(e){
                         console.log(e.statusText);
