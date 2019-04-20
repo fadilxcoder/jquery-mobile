@@ -8,7 +8,7 @@
         fadilxcoder
     </author>
 	
-	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
+	<plugin name="cordova-plugin-whitelist" spec="1.1.0" />
 	
     <preference name="orientation" value="portrait" />
     <preference name="fullscreen" value="true" />
@@ -19,8 +19,16 @@
 	
 	<icon src="icon.png" />
     <splash src="splash.png" />
+	
     <content src="index.html" />
+	
     <access origin="*" />
-	<allow-navigation href="http://*/*" />
-    <allow-intent href="https://*/*" />
+	
+	<allow-intent href="http://*/*" />
+	<allow-intent href="https://*/*" />
+	<allow-intent href="tel:*" />
+	<allow-intent href="sms:*" />
+	<allow-intent href="mailto:*" />
+	<allow-intent href="geo:*" />
+	
 </widget>
