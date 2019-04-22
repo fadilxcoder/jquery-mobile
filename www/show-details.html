@@ -70,7 +70,7 @@
                         delete data['msg'];
 						$.each(data, function (idx, obj )
 						{                              
-							table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-_id="'+ data[idx]._id+'" data-_name="'+ data[idx]._name+'" data-_subject="'+ data[idx]._subject+'" data-_message="'+ data[idx]._message+'" data-_email="'+ data[idx]._email+'" >' + data[idx]._name + '</a></li>');
+							table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-_id="'+ data[idx]._id+'" data-_name="'+ data[idx]._name+'" data-_subject="'+ data[idx]._subject+'" data-_message="'+ data[idx]._message+'" data-_email="'+ data[idx]._email+'" >' + data[idx]._subject + '</a></li>');
 						});
                         $("#ListContainer").append(table);
                         $("#ListContainer li").addClass('ui-first-child ui-last-child');
