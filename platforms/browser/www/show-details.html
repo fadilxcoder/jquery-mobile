@@ -13,7 +13,6 @@
         <meta name="author" content="fadilxcoder" />
         <meta name="copyright" content="fadilxcoder" />
     	<meta charset="utf-8">
-		<meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
     	<link rel="stylesheet" href="./assets/jquery.mobile-1.4.5.min.css">
@@ -40,9 +39,9 @@
         		<div data-role="navbar">
         			<ul>
                         <li><a href="#" data-rel="back" data-icon="ui-btn ui-icon-back"></a></li>
-                        <li><a href="index.html" data-transition="flow" data-icon="ui-btn ui-icon-home"></a></li>
-                        <li><a href="show-details.html" data-transition="flip" data-icon="ui-btn ui-icon-bullets"></a></li>
-        				<li><a href="contact-us.html" data-transition="slideup" data-icon="ui-btn ui-icon-comment"></a></li>
+                        <li><a href="index.html" data-transition="flow" data-ajax="false" data-icon="ui-btn ui-icon-home"></a></li>
+                        <li><a href="show-details.html" data-transition="flip" data-ajax="false" data-icon="ui-btn ui-icon-bullets"></a></li>
+        				<li><a href="contact-us.html" data-transition="slideup" data-ajax="false" data-icon="ui-btn ui-icon-comment"></a></li>
         			</ul>
         		</div>
 	        </footer>
@@ -63,21 +62,15 @@
                 $.ajax({
                     dataType : 'json',
                     url      : 'https://iox.000webhostapp.com/db.php',
-                    //url      : 'http://localhost/rss-feed-xml-json-jqm-app/db.php',
                     cache    : true,
                     type     : 'GET',
                     success  : function (data){
 						var table = '';
-                        //console.log(data[12]);
-                        //var information = JSON.parse(data[i]); 
                         delete data['log'];
                         delete data['msg'];
 						$.each(data, function (idx, obj )
-						{    
-                            //console.log(data[i]);
-                            //console.log(data[idx]._id);                              
-                            console.log(idx);
-							table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-_id="'+ data[idx]._id+'" data-_name="'+ data[idx]._name+'" data-_subject="'+ data[idx]._subject+'" data-_message="'+ data[idx]._message+'" data-_email="'+ data[idx]._email+'" >' + data[idx]._name + '</a></li>');
+						{                              
+							table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-_id="'+ data[idx]._id+'" data-_name="'+ data[idx]._name+'" data-_subject="'+ data[idx]._subject+'" data-_message="'+ data[idx]._message+'" data-_email="'+ data[idx]._email+'" >' + data[idx]._subject + '</a></li>');
 						});
                         $("#ListContainer").append(table);
                         $("#ListContainer li").addClass('ui-first-child ui-last-child');
