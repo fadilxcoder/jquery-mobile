@@ -65,19 +65,16 @@
                     cache    : true,
                     type     : 'GET',
                     success  : function (data){
-						var table = '';
                         delete data['log'];
                         delete data['msg'];
-						$.each(data, function (idx, obj )
-						{                              
-							table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-_id="'+ data[idx]._id+'" data-_name="'+ data[idx]._name+'" data-_subject="'+ data[idx]._subject+'" data-_message="'+ data[idx]._message+'" data-_email="'+ data[idx]._email+'" >' + data[idx]._subject + '</a></li>');
-						});
-                        $("#ListContainer").append(table);
-                        $("#ListContainer li").addClass('ui-first-child ui-last-child');
-                        $("#ListContainer li a").addClass('ui-btn ui-btn-icon-right ui-icon-carat-r');
+						localStorage.setItem("dbData", JSON.stringify(data));
+						showData(data);
+						console.log('200 OK');
                     },
                     error   : function(e){
-                        console.log(e.statusText);
+                        var data = JSON.parse(localStorage.getItem("dbData"));
+                        showData(data);
+                        console.log(e.statusText + ':'+ e.status);
             		},
                     fail    : function (){ 
                     	console.log("Request Fail");
@@ -94,7 +91,18 @@
                     $('#popup div.ui-content h3').text(_name);
                     $('#popup div.ui-content h4').text(_email);
                     $('#popup div.ui-content p').text(_message);
-                }); 
+                });
+                // function Show Data
+                function showData(data){
+                    var table = '';
+                    $.each(data, function (idx, obj )
+                    {                              
+                        table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-_id="'+ data[idx]._id+'" data-_name="'+ data[idx]._name+'" data-_subject="'+ data[idx]._subject+'" data-_message="'+ data[idx]._message+'" data-_email="'+ data[idx]._email+'" >' + data[idx]._subject + '</a></li>');
+                    });
+                    $("#ListContainer").append(table);
+                    $("#ListContainer li").addClass('ui-first-child ui-last-child');
+                    $("#ListContainer li a").addClass('ui-btn ui-btn-icon-right ui-icon-carat-r');
+                }
             });
         </script>
     </body>

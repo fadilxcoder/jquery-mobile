@@ -63,17 +63,14 @@
                     cache    : true,
                     type     : 'GET',
                     success  : function (data){
-						var table = '';
-						$.each(data.items, function (idx, obj) 
-						{                                   
-							table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-description-text="'+ obj.description_text+'" data-title="'+ obj.title+'" >' + obj.title + '</a></li>');
-						});
-                        $("#ListContainer").append(table);
-                        $("#ListContainer li").addClass('ui-first-child ui-last-child');
-                        $("#ListContainer li a").addClass('ui-btn ui-btn-icon-right ui-icon-carat-r');
+                        localStorage.setItem("rssData", JSON.stringify(data.items));
+						showData(data.items);
+						console.log('200 OK');
                     },
                     error   : function(e){
-                        console.log(e.statusText);
+                        var data = JSON.parse(localStorage.getItem("rssData"));
+                        showData(data);
+                        console.log(e.statusText + ':'+ e.status);
             		},
                     fail    : function (){ 
                     	console.log("Request Fail");
@@ -84,7 +81,18 @@
                     var description = $(this).children('a').attr('data-description-text').replace('To read this article in full, please click here', '');
                     $('#popup div.ui-content h2').text(title);
                     $('#popup div.ui-content p').text(description);
-                }); 
+                });
+                // function Show Data
+                function showData(data){
+                    var table = '';
+					$.each(data, function (idx, obj) 
+					{                                   
+						table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-description-text="'+ obj.description_text+'" data-title="'+ obj.title+'" >' + obj.title + '</a></li>');
+					});
+                    $("#ListContainer").append(table);
+                    $("#ListContainer li").addClass('ui-first-child ui-last-child');
+                    $("#ListContainer li a").addClass('ui-btn ui-btn-icon-right ui-icon-carat-r');
+                }
             });
         </script>
     </body>
