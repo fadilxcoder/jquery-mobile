@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>API CLIENT</title>
+        <meta name="author" content="fadilxcoder" />
+        <meta name="copyright" content="fadilxcoder" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+        <link rel="stylesheet" href="./assets/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet" href="./assets/jquery.mobile-style.css">
+        <script src="./assets/jquery.mobile-1.12.4-jquery.min.js"></script>
+        <script src="./assets/jquery.mobile-1.4.5.min.js"></script>
+    </head>
+    <body>
+        <div data-role="page" id="users-page" data-theme="a">
+            <header data-role="header" role="banner">
+                <h1>API CLIENT</h1>
+                <h6>Users</h6>
+                <picture>
+                    <img src="./assets/images/image.gif" alt="Banner Image" />
+                </picture>
+            </header>
+            <div data-role="content">
+                <ul data-role="listview" data-inset="true" id="ListContainer"></ul>
+            </div>
+            <footer data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#" data-rel="back" data-icon="ui-btn ui-icon-back"></a></li>
+                        <li><a href="index.html" data-transition="flow" data-ajax="false" data-icon="ui-btn ui-icon-home"></a></li>
+                        <li><a href="users.html" data-transition="flip" data-ajax="false" data-icon="ui-btn ui-icon-bullets"></a></li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+        
+        <div data-role="page" id="popup">
+            <div data-role="header" data-theme="a">
+                <h1></h1>
+            </div>
+            <div role="main" class="ui-content">
+                <h2></h2>
+                <p><small><b>Email : </b><span></span></small></p>
+                <p><small><b>Phone : </b><span></span></small></p>
+                <p><small><b>Address : </b><span></span></small></p>
+                <p><small><b>Job : </b><span></span></small></p>
+                <p><small><b>Company : </b><span></span></small></p>
+                <p><small><b>Card : </b><span></span></small></p>
+                <p><small><b>Bank account : </b><span></span></small></p>
+            </div>
+        </div>
+        <script type="text/javascript">
+
+            // Call endpoint
+            $(document).ready(function(){ 
+                $.ajax({
+                    dataType : 'json',
+                    url      : 'https://my-json-server.typicode.com/fadilxcoder/fake-api-server/users',
+                    cache    : true,
+                    type     : 'GET',
+                    success  : function (data){
+						showData(data);
+						console.log('200 OK');
+                    },
+                    error   : function(e){
+                        showData(data);
+                        console.log(e.statusText + ':'+ e.status);
+                    },
+                    fail    : function (){ 
+                        console.log("Request Fail");
+                    }
+                });
+
+                // Display content
+                $(document).on('click', 'li.click-to-pop-up', function(){   
+                    var name = $(this).children('a').attr('data-name');
+                    var email = $(this).children('a').attr('data-email');
+                    var phone = $(this).children('a').attr('data-phone');
+                    var address = $(this).children('a').attr('data-address');
+                    var job = $(this).children('a').attr('data-job');
+                    var company = $(this).children('a').attr('data-company');
+                    var card = $(this).children('a').attr('data-card');
+                    var account = $(this).children('a').attr('data-account');
+
+                    $('#popup div.ui-content h2').text(name);
+                    $('#popup div.ui-content p:nth-child(2) small span').text(email);
+                    $('#popup div.ui-content p:nth-child(3) small span').text(phone);
+                    $('#popup div.ui-content p:nth-child(4) small span').text(address);
+                    $('#popup div.ui-content p:nth-child(5) small span').text(job);
+                    $('#popup div.ui-content p:nth-child(6) small span').text(company);
+                    $('#popup div.ui-content p:nth-child(7) small span').text(card);
+                    $('#popup div.ui-content p:nth-child(8) small span').text(account);
+                });
+
+                // function Show Data
+                function showData(data){
+                    var table = '';
+					$.each(data, function (idx, obj) 
+					{                                   
+						table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-email="'+ obj.email+'" data-name="'+ obj.name+'" data-phone="'+ obj.phone+'" data-address="'+ obj.address+'" data-job="'+ obj.job+'" data-company="'+ obj.company+'" data-card="'+ obj.card+'" data-account="'+ obj.account+'" >' + obj.name + '</a></li>');
+					});
+                    $("#ListContainer").append(table);
+                    $("#ListContainer li").addClass('ui-first-child ui-last-child');
+                    $("#ListContainer li a").addClass('ui-btn ui-btn-icon-right ui-icon-carat-r');
+                }
+            });
+        </script>
+    </body>
+</html>
