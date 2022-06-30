@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>API CLIENT</title>
+        <title>STREAM</title>
         <meta name="author" content="fadilxcoder" />
         <meta name="copyright" content="fadilxcoder" />
         <meta charset="utf-8">
@@ -11,12 +11,23 @@
         <link rel="stylesheet" href="./assets/jquery.mobile-style.css">
         <script src="./assets/jquery.mobile-1.12.4-jquery.min.js"></script>
         <script src="./assets/jquery.mobile-1.4.5.min.js"></script>
+        <style>
+            .ui-dialog-contain {
+                width: initial;
+                max-width: initial;
+                margin: 5%;
+                padding: 0;
+                position: relative;
+                top: -1em;
+                height: initial;
+                min-height: 100vh;
+            }
+        </style>
     </head>
     <body>
         <div data-role="page" id="home-page" data-theme="a">
             <header data-role="header" role="banner">
-                <h1>API CLIENT</h1>
-                <h6>Articles</h6>
+                <h1>STREAM</h1>
                 <picture>
                     <img src="./assets/images/image.gif" alt="Banner Image" />
                 </picture>
@@ -24,15 +35,6 @@
             <div data-role="content">
                 <ul data-role="listview" data-inset="true" id="ListContainer"></ul>
             </div>
-            <footer data-role="footer" data-position="fixed">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#" data-rel="back" data-icon="ui-btn ui-icon-back"></a></li>
-                        <li><a href="index.html" data-transition="flow" data-ajax="false" data-icon="ui-btn ui-icon-home"></a></li>
-                        <li><a href="users.html" data-transition="flip" data-ajax="false" data-icon="ui-btn ui-icon-bullets"></a></li>
-                    </ul>
-                </div>
-            </footer>
         </div>
         
         <div data-role="page" id="popup">
@@ -41,11 +43,7 @@
             </div>
             <div role="main" class="ui-content">
                 <h2></h2>
-                <h4></h4>
-                <p><small><b>Views : </b><span></span></small></p>
-                <p><small><b>Like : </b><span></span></small></p>
-                <p><small><b>Dislike : </b><span></span></small></p>
-                <p><small><b>Published on : </b><span></span></small></p>
+                <iframe src="" style="width: 100%;height: 100vh;" frameborder="0"></iframe>
             </div>
         </div>
         <script type="text/javascript">
@@ -54,7 +52,7 @@
             $(document).ready(function(){ 
                 $.ajax({
                     dataType : 'json',
-                    url      : 'https://my-json-server.typicode.com/fadilxcoder/fake-api-server/articles',
+                    url      : 'https://my-json-server.typicode.com/fadilxcoder/web-crawler/person-of-interest-season-1',
                     cache    : true,
                     type     : 'GET',
                     success  : function (data){
@@ -73,18 +71,11 @@
                 // Display content
                 $(document).on('click', 'li.click-to-pop-up', function(){   
                     var title = $(this).children('a').attr('data-title');
-                    var description = $(this).children('a').attr('data-description-text');
-                    var views = $(this).children('a').attr('data-views');
-                    var like = $(this).children('a').attr('data-like');
-                    var dislike = $(this).children('a').attr('data-dislike');
-                    var date_published = $(this).children('a').attr('data-date-published');
+                    var url = $(this).children('a').attr('data-url');
 
                     $('#popup div.ui-content h2').text(title);
-                    $('#popup div.ui-content h4').text(description);
-                    $('#popup div.ui-content p:nth-child(3) small span').text(views);
-                    $('#popup div.ui-content p:nth-child(4) small span').text(like);
-                    $('#popup div.ui-content p:nth-child(5) small span').text(dislike);
-                    $('#popup div.ui-content p:nth-child(6) small span').text(date_published);
+                    $('#popup div.ui-content iframe').attr("src", url);
+
                 });
 
                 // function Show Data
@@ -92,7 +83,7 @@
                     var table = '';
 					$.each(data, function (idx, obj) 
 					{                                   
-						table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-description-text="'+ obj.description+'" data-title="'+ obj.title+'" data-views="'+ obj.views+'" data-like="'+ obj.like+'" data-dislike="'+ obj.dislike+'" data-date-published="'+ obj.date_published+'" >' + obj.title + '</a></li>');
+						table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-url="'+ obj +'" data-title="'+ idx +'" >' + idx + '</a></li>');
 					});
                     $("#ListContainer").append(table);
                     $("#ListContainer li").addClass('ui-first-child ui-last-child');
