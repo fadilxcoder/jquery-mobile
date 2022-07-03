@@ -27,9 +27,15 @@ jobs:
     steps:
       -  uses: actions/checkout@v2
 
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "17.x"
+
       - name: Deploy to Vercel Action
         uses: BetaHuhn/deploy-to-vercel-action@v1.9.0
-        # if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          npx vercel --token ${VERCEL_TOKEN} --prod
         with:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -37,4 +43,3 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
           PRODUCTION: true
           GITHUB_DEPLOYMENT_ENV: Production
-          FORCE: true
