@@ -22,7 +22,7 @@ jobs:
         run: |
           newman run postman_collection.json
   deploy:
-    needs: [build-test-api] # wait for other jobs
+    needs: build-test-api
     runs-on: ubuntu-latest
     steps:
       -  uses: actions/checkout@v2
