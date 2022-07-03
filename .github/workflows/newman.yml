@@ -36,7 +36,7 @@ jobs:
         # uses: BetaHuhn/deploy-to-vercel-action@v1.9.0
         run: |
           npx vercel --token ${VERCEL_TOKEN} --prod
-        with:
+        env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
