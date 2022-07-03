@@ -2,7 +2,7 @@ name: API CI-CD
 on:
   push:
     branches:
-      - fake-api
+      - master
 jobs:
   build-test-api:
     runs-on: ubuntu-latest

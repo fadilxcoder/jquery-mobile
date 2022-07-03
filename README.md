@@ -1,5 +1,9 @@
 # NOTES
 
+- **master** : Fake API branch
+- **poc** : JQM PoC (deprecated) branch
+- **stream** : Videos streaming branch
+
 Using Apache cordova / Linux
 
 - Install node pacage : `npm install -g cordova`
