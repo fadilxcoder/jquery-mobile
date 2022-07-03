@@ -1,0 +1,36 @@
+name: API CI-CD
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-test-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "17.x"
+
+      - name: Install newman
+        run: |
+          npm install -g newman
+
+      - name: Run POSTMAN collection
+        run: |
+          newman run postman_collection.json
+  deploy:
+    needs: [build-test-api] # wait for other jobs
+    runs-on: ubuntu-latest
+    steps:
+      -  uses: actions/checkout@v2
+
+      - name: Deploy to Vercel Action
+        uses: BetaHuhn/deploy-to-vercel-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
