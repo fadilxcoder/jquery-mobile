@@ -9,14 +9,11 @@
         <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
         <link rel="stylesheet" href="./assets/jquery.mobile-1.4.5.min.css">
         <link rel="stylesheet" href="./assets/jquery.mobile-style.css">
-        <script src="./assets/jquery.mobile-1.12.4-jquery.min.js"></script>
-        <script src="./assets/jquery.mobile-1.4.5.min.js"></script>
     </head>
     <body>
         <div data-role="page" id="home-page" data-theme="a">
             <header data-role="header" role="banner">
                 <h1>API CLIENT</h1>
-                <h6>Articles</h6>
                 <picture>
                     <img src="./assets/images/articles.gif" style="max-height:200px !important;" alt="Banner Image" />
                 </picture>
@@ -48,57 +45,8 @@
                 <p><small><b>Published on : </b><span></span></small></p>
             </div>
         </div>
-        <script type="text/javascript">
-
-            // Call endpoint
-            $(document).ready(function(){ 
-                $.ajax({
-                    dataType : 'json',
-                    url      : 'https://my-json-server.typicode.com/fadilxcoder/fake-api-server/articles',
-                    cache    : true,
-                    type     : 'GET',
-                    success  : function (data){
-						showData(data);
-						console.log('200 OK');
-                    },
-                    error   : function(e){
-                        showData(data);
-                        console.log(e.statusText + ':'+ e.status);
-                    },
-                    fail    : function (){ 
-                        console.log("Request Fail");
-                    }
-                });
-
-                // Display content
-                $(document).on('click', 'li.click-to-pop-up', function(){   
-                    var title = $(this).children('a').attr('data-title');
-                    var description = $(this).children('a').attr('data-description-text');
-                    var views = $(this).children('a').attr('data-views');
-                    var like = $(this).children('a').attr('data-like');
-                    var dislike = $(this).children('a').attr('data-dislike');
-                    var date_published = $(this).children('a').attr('data-date-published');
-
-                    $('#popup div.ui-content h2').text(title);
-                    $('#popup div.ui-content h4').text(description);
-                    $('#popup div.ui-content p:nth-child(3) small span').text(views);
-                    $('#popup div.ui-content p:nth-child(4) small span').text(like);
-                    $('#popup div.ui-content p:nth-child(5) small span').text(dislike);
-                    $('#popup div.ui-content p:nth-child(6) small span').text(date_published);
-                });
-
-                // function Show Data
-                function showData(data){
-                    var table = '';
-					$.each(data, function (idx, obj) 
-					{                                   
-						table += ('<li class="click-to-pop-up"><a href="#popup" data-rel="dialog" data-transition="flip" data-description-text="'+ obj.description+'" data-title="'+ obj.title+'" data-views="'+ obj.views+'" data-like="'+ obj.like+'" data-dislike="'+ obj.dislike+'" data-date-published="'+ obj.date_published+'" >' + obj.title + '</a></li>');
-					});
-                    $("#ListContainer").append(table);
-                    $("#ListContainer li").addClass('ui-first-child ui-last-child');
-                    $("#ListContainer li a").addClass('ui-btn ui-btn-icon-right ui-icon-carat-r');
-                }
-            });
-        </script>
+        <script src="./assets/jquery.mobile-1.12.4-jquery.min.js"></script>
+        <script src="./assets/jquery.mobile-1.4.5.min.js"></script>
+        <script src="./assets/script.js" type="module"></script>
     </body>
 </html>
