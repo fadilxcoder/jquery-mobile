@@ -4,7 +4,7 @@ on:
     branches:
       - master
 jobs:
-  build-test-api:
+  api-tester:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,7 +22,7 @@ jobs:
         run: |
           newman run postman_collection.json
   deploy:
-    needs: build-test-api
+    needs: api-tester
     runs-on: ubuntu-latest
     steps:
       -  uses: actions/checkout@v2
@@ -33,7 +33,6 @@ jobs:
           node-version: "17.x"
 
       - name: Deploy to Vercel Action
-        # uses: BetaHuhn/deploy-to-vercel-action@v1.9.0
         run: |
           npx vercel --token ${VERCEL_TOKEN} --prod
         env:
