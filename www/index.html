@@ -11,26 +11,14 @@
         <link rel="stylesheet" href="./assets/jquery.mobile-style.css">
         <script src="./assets/jquery.mobile-1.12.4-jquery.min.js"></script>
         <script src="./assets/jquery.mobile-1.4.5.min.js"></script>
-        <style>
-            .ui-dialog-contain {
-                width: initial;
-                max-width: initial;
-                margin: 5%;
-                padding: 0;
-                position: relative;
-                top: -1em;
-                height: initial;
-                min-height: 100vh;
-            }
-        </style>
     </head>
     <body>
         <div data-role="page" id="home-page" data-theme="a">
             <header data-role="header" role="banner">
-                <h1>STREAM</h1>
                 <picture>
-                    <img src="./assets/images/image.gif" alt="Banner Image" />
+                    <img src="./assets/images/image.gif" style="max-height:200px !important;" alt="Banner Image" />
                 </picture>
+                <h3>Person of interest - Season 2</h3>
             </header>
             <div data-role="content">
                 <ul data-role="listview" data-inset="true" id="ListContainer"></ul>
@@ -39,20 +27,18 @@
         
         <div data-role="page" id="popup">
             <div data-role="header" data-theme="a">
-                <h1></h1>
+                <h1>Person of interest - Season 2</h1>
             </div>
             <div role="main" class="ui-content">
                 <h2></h2>
-                <iframe src="" style="width: 100%;height: 100vh;" frameborder="0"></iframe>
+                <iframe src="" style="width: 100%;" frameborder="0"></iframe>
             </div>
         </div>
         <script type="text/javascript">
-
-            // Call endpoint
             $(document).ready(function(){ 
                 $.ajax({
                     dataType : 'json',
-                    url      : 'https://my-json-server.typicode.com/fadilxcoder/web-crawler/person-of-interest-season-1',
+                    url      : 'https://my-json-server.typicode.com/fadilxcoder/web-crawler/person-of-interest-season',
                     cache    : true,
                     type     : 'GET',
                     success  : function (data){
@@ -60,15 +46,13 @@
 						console.log('200 OK');
                     },
                     error   : function(e){
-                        showData(data);
-                        console.log(e.statusText + ':'+ e.status);
+                        alert('Ajax call failed');
                     },
                     fail    : function (){ 
                         console.log("Request Fail");
                     }
                 });
 
-                // Display content
                 $(document).on('click', 'li.click-to-pop-up', function(){   
                     var title = $(this).children('a').attr('data-title');
                     var url = $(this).children('a').attr('data-url');
@@ -78,7 +62,6 @@
 
                 });
 
-                // function Show Data
                 function showData(data){
                     var table = '';
 					$.each(data, function (idx, obj) 

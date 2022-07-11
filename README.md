@@ -1,6 +1,10 @@
 # NOTES
 
-Using Apache cordova / Linux
+- multiple git repo project
+- Web based : https://github.com/fadilxcoder/stream-by-api.git
+- Mobile : https://github.com/fadilxcoder/jquery-mobile/tree/stream
+
+## Using Apache cordova / Linux
 
 - Install node pacage : `npm install -g cordova`
 - Create project : `cordova create <APP_NAME>`
