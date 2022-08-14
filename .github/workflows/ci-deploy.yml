@@ -27,11 +27,6 @@ jobs:
     steps:
       -  uses: actions/checkout@v2
 
-      - name: Install Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "17.x"
-
       - name: Deploy to Vercel Action
         uses: BetaHuhn/deploy-to-vercel-action@v1
         env:
