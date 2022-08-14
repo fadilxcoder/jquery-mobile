@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "50e13093-5f14-4990-bfa0-85f26aa2c6de",
-		"name": "Fake Api",
+		"_postman_id": "16c87f03-a66f-4a91-835b-9e8f3f7a7f88",
+		"name": "Fake Api - Glitch / Versionning",
 		"description": "*   [https://github.com/fadilxcoder/fake-api-server.git](https://github.com/fadilxcoder/fake-api-server.git)",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18647677"
 	},
 	"item": [
 		{
@@ -53,68 +54,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "{{BASE_URL}}users",
-					"host": [
-						"{{BASE_URL}}users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/users",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"// Testing response HTTP Code",
-							"pm.test(\"Testing status code \", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([201]);",
-							"});",
-							"",
-							"// Testing response JSON schema",
-							"var Ajv = require(\"ajv\");",
-							"ajv = new Ajv({logger: console});",
-							"schema = {",
-							"    \"type\": \"object\",",
-							"    \"properties\": {",
-							"        \"_id\": { \"type\": \"string\" },",
-							"        \"id\": { \"type\": \"integer\" },",
-							"        \"name\": { \"type\": \"string\" },",
-							"        \"email\": { \"type\": \"string\" },",
-							"        \"phone\": { \"type\": \"string\" },",
-							"        \"address\": { \"type\": \"string\" },",
-							"        \"job\": { \"type\": \"string\" },",
-							"        \"company\": { \"type\": \"string\" },",
-							"        \"card\": { \"type\": \"string\" },",
-							"        \"account\": { \"type\": \"string\" }",
-							"    },",
-							"    'additionalProperties': false,",
-							"};",
-							"",
-							"pm.test(\"Response JSON schema validation\", function() {",
-							"    pm.expect(ajv.validate(schema, pm.response.json())).to.be.true;",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"_id\": \"{{$guid}}\",\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"phone\": \"{{$randomPhoneNumber}}\",\r\n    \"address\": \"{{$randomStreetAddress}}\",\r\n    \"job\": \"{{$randomJobTitle}}\",\r\n    \"company\": \"{{$randomCompanyName}}\",\r\n    \"card\": \"{{$randomBankAccountName}}\",\r\n    \"account\": \"{{$randomBankAccount}}\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "{{BASE_URL}}users",
 					"host": [
@@ -235,66 +174,6 @@
 			"response": []
 		},
 		{
-			"name": "/articles",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"// Testing response HTTP Code",
-							"pm.test(\"Testing status code \", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([201]);",
-							"});",
-							"",
-							"// Testing response JSON schema",
-							"var Ajv = require(\"ajv\");",
-							"ajv = new Ajv({logger: console});",
-							"schema = {",
-							"    \"type\": \"object\",",
-							"    \"properties\": {",
-							"        \"_id\": { \"type\": \"string\" },",
-							"        \"id\": { \"type\": \"integer\" },",
-							"        \"title\": { \"type\": \"string\" },",
-							"        \"description\": { \"type\": \"string\" },",
-							"        \"views\": { \"type\": \"integer\" },",
-							"        \"like\": { \"type\": \"integer\" },",
-							"        \"dislike\": { \"type\": \"integer\" },",
-							"        \"date_published\": { \"type\": \"string\" },",
-							"    },",
-							"    'additionalProperties': false,",
-							"};",
-							"",
-							"pm.test(\"Response JSON schema validation\", function() {",
-							"    pm.expect(ajv.validate(schema, pm.response.json())).to.be.true;",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"_id\": \"{{$guid}}\",\r\n    \"title\": \"{{$randomJobTitle}}\",\r\n    \"description\": \"{{$randomLoremSentences}}\",\r\n    \"views\": {{$randomInt}},\r\n    \"like\": {{$randomInt}},\r\n    \"dislike\": {{$randomInt}},\r\n    \"date_published\": \"{{$randomDateRecent}}\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{BASE_URL}}articles",
-					"host": [
-						"{{BASE_URL}}articles"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "/articles/{id}",
 			"event": [
 				{
@@ -372,8 +251,21 @@
 	"variable": [
 		{
 			"key": "BASE_URL",
+			"value": "https://json-server-fake-api.glitch.me/",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "BASE_URL",
 			"value": "https://json-server-fake-api.glitch.me/v1.",
-			"type": "default"
+			"type": "string",
+			"disabled": false
+		},
+		{
+			"key": "BASE_URL",
+			"value": "https://json-server-fake-api.glitch.me/v0.",
+			"type": "string",
+			"disabled": true
 		}
 	]
 }
