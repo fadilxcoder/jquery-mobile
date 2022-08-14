@@ -372,7 +372,7 @@
 	"variable": [
 		{
 			"key": "BASE_URL",
-			"value": "https://my-json-server.typicode.com/fadilxcoder/fake-api-server/",
+			"value": "https://json-server-fake-api.glitch.me/v1.",
 			"type": "default"
 		}
 	]

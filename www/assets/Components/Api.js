@@ -1,7 +1,8 @@
 class Api
 {
     // Api BASE URL
-    url = 'https://my-json-server.typicode.com/fadilxcoder/fake-api-server/';
+    version = 'V1.'
+    url = 'https://json-server-fake-api.glitch.me/' + this.version;
 
     // Api endpoints
     routes = {
