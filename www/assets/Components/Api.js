@@ -1,7 +1,7 @@
 class Api
 {
     // Api BASE URL
-    version = ''
+    version = 'V1.'
     url = 'https://json-server-fake-api.glitch.me/' + this.version;
 
     // Api endpoints

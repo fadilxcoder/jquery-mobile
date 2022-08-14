@@ -253,13 +253,13 @@
 			"key": "BASE_URL",
 			"value": "https://json-server-fake-api.glitch.me/",
 			"type": "string",
-			"disabled": false
+			"disabled": true
 		},
 		{
 			"key": "BASE_URL",
 			"value": "https://json-server-fake-api.glitch.me/v1.",
 			"type": "string",
-			"disabled": true
+			"disabled": false
 		},
 		{
 			"key": "BASE_URL",
